@@ -1,24 +1,19 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { ChakraProvider } from '@chakra-ui/react'
+import MainPage from './components/organisms/MainPage/MainPage';
+import { fetchContext } from './context/fetchContext'
 
 function App() {
+  const [refetch, setRefetch] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <fetchContext.Provider value={{refetch, setRefetch}}>
+      <ChakraProvider>
+          <div className="App">
+            <MainPage />
+          </div>
+      </ChakraProvider>
+    </fetchContext.Provider>
   );
 }
 
